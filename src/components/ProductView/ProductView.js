@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductListItem from "../ProductListItem";
 import ProductDetails from "../ProductDetails";
 import './ProductView.css'
@@ -10,6 +10,18 @@ function ProductView({ products }) {
     const [sideOpen, setSideOpen] = useState(true);
     const [selectedProduct, setSelectedProduct] = useState();
     const [isSelected, setIsSelected] = useState(false)
+
+    useEffect(() => {
+        console.log(`selectedProduct CHANGED TO`, selectedProduct);
+        if (selectedProduct) setSideOpen(true);
+    }, [selectedProduct])
+
+    useEffect(() => {
+        console.log(`sideOpen CHANGED TO`, sideOpen);
+        setIsSelected(false);
+        if (!sideOpen) setSelectedProduct();
+    }, [sideOpen])
+
     return (
         <div className="product-view">
             <div className="product-main-area">
