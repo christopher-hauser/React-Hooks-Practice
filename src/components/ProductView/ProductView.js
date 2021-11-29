@@ -9,7 +9,7 @@ function ProductView({ products }) {
     // TODO: Replace with state variable
     const [sideOpen, setSideOpen] = useState(true);
     const [selectedProduct, setSelectedProduct] = useState();
-
+    const [isSelected, setIsSelected] = useState(false)
     return (
         <div className="product-view">
             <div className="product-main-area">
@@ -19,7 +19,13 @@ function ProductView({ products }) {
                         <ProductListItem
                             key={item.id}
                             product={item}
-                            onClick={() => setSelectedProduct(item)}
+                            isSelected={isSelected}
+                            selectedProduct={selectedProduct}
+                            onClick={() =>{
+                                setSelectedProduct(item)
+                                setIsSelected(true)
+                            }
+                            }
                         />
                     )}
                 </div>
@@ -29,7 +35,6 @@ function ProductView({ products }) {
                     <div className="product-side-panel-toggle"
                          onClick={() => {
                              setSideOpen(!sideOpen);
-                             selectedProduct.className = 'selected';
                          }}>
                         {sideOpen ? '>' : '<'}
                     </div>
